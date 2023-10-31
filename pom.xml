@@ -6,7 +6,7 @@
 
     <groupId>io.qsrlab.sts</groupId>
     <artifactId>ftp-extension-commands</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>Application Level Gateway for FTP STOR command to HTTP POST command</description>
     <url>https://qsrlab.io</url>
 

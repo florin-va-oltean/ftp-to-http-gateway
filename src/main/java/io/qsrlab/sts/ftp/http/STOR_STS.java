@@ -135,7 +135,7 @@ public class STOR_STS extends AbstractCommand {
                 // attempt to close the output stream so that errors in 
                 // closing it will return an error to the client (FTPSERVER-119) 
                 outStream.close();
-                respCode = storeViaHttpPost(file);
+                respCode = storeViaHttpPost(session,file);
                 file.delete();
                 logger.warn("File uploaded locally {} and response code from http destination: {}", fileName, respCode);
                 failure = (respCode<200) || (respCode>299);
@@ -171,9 +171,9 @@ public class STOR_STS extends AbstractCommand {
         }
     }
 
-    private int storeViaHttpPost(final FtpFile file){
+    private int storeViaHttpPost(final FtpIoSession session, final FtpFile file){
         HttpURLConnection  http = null;
-        try (InputStream inputStream = file.createInputStream(file.getSize())){
+        try (InputStream inputStream = file.createInputStream(session.getFileOffset())){
             String fileName = file.getAbsolutePath();
             byte[] b = new byte[inputStream.available()];
             inputStream.read(b);
